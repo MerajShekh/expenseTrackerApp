@@ -1,4 +1,22 @@
 module.exports = {
   root: true,
   extends: '@react-native-community',
+  plugins: ['module-resolver', 'testing-library'],
+  parser: 'babel-eslint',
+  rules: {
+    'comma-dangle': ['error', 'only-multiline'],
+    'import/newline-after-import': 'error',
+    'import/order': 'error',
+    'module-resolver/use-alias': 'error',
+    'no-console': 'warn',
+    'testing-library/await-async-query': 'error',
+    'testing-library/await-async-utils': 'error',
+    'testing-library/no-await-sync-events': 'error',
+    'testing-library/no-await-sync-query': 'error',
+    'testing-library/no-unnecessary-act': 'error',
+    'testing-library/no-wait-for-empty-callback': 'error',
+    'testing-library/no-wait-for-multiple-assertions': 'error',
+    'testing-library/no-wait-for-snapshot': 'error',
+    'testing-library/prefer-find-by': 'warn',
+  },
 };
