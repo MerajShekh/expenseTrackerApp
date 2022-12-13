@@ -51,8 +51,8 @@ const CutomTabNavigator = ({state, descriptors, navigation}) => {
               <Image
                 source={options.tabBarIcon}
                 style={{
-                  height: 28,
-                  width: 28,
+                  height: 22,
+                  width: 22,
                   tintColor: isFocused ? colors.primary : colors.inactiveTab,
                 }}
               />
@@ -61,10 +61,11 @@ const CutomTabNavigator = ({state, descriptors, navigation}) => {
               style={{
                 color: isFocused ? colors.primary : '#B1B1B1',
                 textAlign: 'center',
-                fontSize: 14,
+                fontSize: 11,
                 fontWeight: '500',
               }}>
-              {isFocused ? label : null}
+              {/* isFocused ? label : null */}
+              {label}
             </Text>
           </TouchableOpacity>
         );

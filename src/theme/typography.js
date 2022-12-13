@@ -4,7 +4,6 @@ export const typography = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '900',
-    fontFamily: 'lato',
   },
   text: {
     fontSize: 16,

@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import React from 'react';
 import {useTheme} from '@react-navigation/native';
 import {typography, shadow} from '../theme';
-import {CircularProgress, List} from '../components';
+import {CircularProgress, List, PageWrapper} from '../components';
 
 export const Home = () => {
   const {colors} = useTheme();
@@ -53,7 +53,7 @@ export const Home = () => {
 
   return (
     <ScrollView>
-      <View style={{paddingHorizontal: 15, flex: 1}}>
+      <PageWrapper>
         {/* profile section */}
         <View style={styles.profileContainer}>
           <View
@@ -160,7 +160,7 @@ export const Home = () => {
           </View>
           <List data={data} categories={categories} />
         </View>
-      </View>
+      </PageWrapper>
     </ScrollView>
   );
 };

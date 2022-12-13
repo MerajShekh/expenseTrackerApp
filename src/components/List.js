@@ -2,9 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   StatusBar,
-  ScrollView,
   Image,
   TouchableOpacity,
 } from 'react-native';
@@ -18,12 +16,12 @@ export const List = ({data, categories}) => {
 
   return (
     <View style={[shadow.primary, styles.listContainer]}>
-      <FlatList
-        data={data}
-        renderItem={({item}) => {
+      {data &&
+        data.map((item, index) => {
           const category = categories.filter(c => c.id === item.categoryId)[0];
+
           return (
-            <View>
+            <View key={index}>
               <View style={styles.listItem}>
                 <View
                   style={{
@@ -63,9 +61,7 @@ export const List = ({data, categories}) => {
               <Divider />
             </View>
           );
-        }}
-        extraData={item => item.id}
-      />
+        })}
     </View>
   );
 };
