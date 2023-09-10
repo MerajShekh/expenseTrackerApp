@@ -8,6 +8,6 @@ export const PageWrapper = ({children}) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
-    flex: 1,
+    // flex: 1,
   },
 });

@@ -13,18 +13,43 @@ import {strings} from '../localization';
 import {InputField, Divider, Button} from '../components';
 import {spacing} from '../theme';
 import {ICONS} from '../assets';
+import {users} from '../constants/dummyData';
+import {Snackbar} from 'react-native-paper';
+import storage from '../redux/storage';
+import {login} from '../redux/reducers/authSlice';
+import {useDispatch, useSelector} from 'react-redux';
 
 export const Login = () => {
   const {colors} = useTheme();
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState('test@gmail.com');
+  const [password, setPassword] = useState('1234');
+  const [isVisible, setIsVisible] = useState(false);
+  const user = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  const handleLogin = () => {
+    if (!email || !password) {
+      setIsVisible(true);
+      return;
+    }
+    dispatch(login({email, password}));
+  };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
+      <Snackbar
+        visible={isVisible}
+        onDismiss={() => setIsVisible(false)}
+        action={{
+          label: 'Undo',
+          onPress: () => setIsVisible(false),
+        }}>
+        Email or Password not match!
+      </Snackbar>
       <View style={{flex: 1, padding: 20}}>
         <Text
           style={{
-            color: colors.text1,
+            color: colors.textOne,
             fontSize: spacing.l,
             textAlign: 'center',
             marginVertical: 50,
@@ -49,13 +74,18 @@ export const Login = () => {
         <Text
           style={{
             textAlign: 'right',
-            color: colors.text2,
+            color: colors.textTwo,
             marginTop: 10,
             fontWeight: '500',
           }}>
           Forgot Password ?
         </Text>
-        <Button title="Login" fill style={{marginTop: 40}} />
+        <Button
+          title="Login"
+          fill
+          style={{marginTop: 40}}
+          onPress={handleLogin}
+        />
         <View style={{marginTop: 50}}>
           <Divider>Or login with</Divider>
         </View>

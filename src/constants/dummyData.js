@@ -56,6 +56,14 @@ export const transactionsData = [
   },
 ];
 
+export const users = [
+  {
+    name: 'Meraj',
+    email: 'test@gmail.com',
+    password: 'test123',
+  },
+];
+
 export const transactionsList = new Array(5).fill(0).map((_, index1) => ({
   title: `Title ${index1}`,
   data: new Array(10).fill(0).map((_, index) => ({

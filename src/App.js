@@ -1,13 +1,21 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import RootNavigator from './navigation';
+import {Provider as PaperProvider} from 'react-native-paper';
+import {store} from './redux/store';
+
+import {Provider} from 'react-redux';
 
 const App = () => {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <RootNavigator />
-    </GestureHandlerRootView>
+    <Provider store={store}>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <PaperProvider>
+          <RootNavigator />
+        </PaperProvider>
+      </GestureHandlerRootView>
+    </Provider>
   );
 };
 

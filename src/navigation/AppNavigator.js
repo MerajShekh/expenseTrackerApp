@@ -4,12 +4,14 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home, Budget, Profile, Stats, Transactions} from '../screens';
 import CutomTabNavigator from './CutomTabNavigator';
 import {NAVIGATION} from '../constants/navigation';
+import BudgetNavigator from './BudgetNavigator';
+import TransactionNavigator from './TransactionNavigator';
 
 const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="transaction"
       tabBar={props => <CutomTabNavigator {...props} />}
       screenOptions={{
         headerShown: false,
@@ -23,22 +25,22 @@ const AppNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Transaction"
-        component={Transactions}
+        name={NAVIGATION.Transaction}
+        component={TransactionNavigator}
         options={{
           tabBarIcon: require('../assets/icons/swap.png'),
         }}
       />
       <Tab.Screen
-        name="Stats"
+        name={NAVIGATION.Stats}
         component={Stats}
         options={{
           tabBarIcon: require('../assets/icons/bar.png'),
         }}
       />
       <Tab.Screen
-        name="Budget"
-        component={Budget}
+        name={NAVIGATION.Budget}
+        component={BudgetNavigator}
         options={{
           tabBarIcon: require('../assets/icons/rupee.png'),
         }}

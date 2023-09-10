@@ -1,11 +1,26 @@
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useTheme} from '@react-navigation/native';
 import {typography, shadow} from '../theme';
 import {CircularProgress, List, PageWrapper} from '../components';
+import {useSelector, useDispatch} from 'react-redux';
+import {getUser, getCategories} from '../selectors/userSelector';
+import {getAllCategory} from '../redux/reducers/categorySlice';
+import {convertBufferToBase64} from '../helper/globalFunction';
+const defaultIcon = require('../assets/icons/bank.png');
 
 export const Home = () => {
   const {colors} = useTheme();
+  const dispatch = useDispatch();
+  const user = useSelector(getUser);
+
+  useEffect(() => {
+    dispatch(getAllCategory());
+  }, []);
+
+  const categoriesList = useSelector(getCategories);
+  console.log('categoriesList', categoriesList);
+
   const categories = [
     {
       id: 1,
@@ -70,7 +85,7 @@ export const Home = () => {
                 typography.profileText,
                 {color: colors.secondary, marginLeft: 10},
               ]}>
-              User Name
+              {user.firstName}
             </Text>
           </View>
           <Image
@@ -112,33 +127,43 @@ export const Home = () => {
             <Text style={[typography.label, {color: colors.secondary}]}>
               Category
             </Text>
-            <Text style={[typography.error, {color: colors.text2}]}>
+            <Text style={[typography.error, {color: colors.textTwo}]}>
               See All
             </Text>
           </View>
+
           <View style={[styles.categoryContainer]}>
-            {categories.map(item => (
-              <View key={item.id} style={styles.categoryBox}>
-                <View
-                  style={[
-                    styles.categoryIcon,
-                    shadow.primary,
-                    {
-                      backgroundColor: colors.background,
-                    },
-                  ]}>
-                  <Image
-                    source={item.icon}
-                    style={{
-                      height: 30,
-                      width: 30,
-                      tintColor: colors.primary,
-                    }}
-                  />
-                </View>
-                <Text>{item.name}</Text>
-              </View>
-            ))}
+            {categoriesList &&
+              categoriesList.map(item => {
+                return (
+                  <View key={item._id} style={styles.categoryBox}>
+                    <View
+                      style={[
+                        styles.categoryIcon,
+                        shadow.primary,
+                        {
+                          backgroundColor: colors.background,
+                        },
+                      ]}>
+                      <Image
+                        source={
+                          item.icon
+                            ? {
+                                uri: convertBufferToBase64(item.icon.data.data),
+                              }
+                            : defaultIcon
+                        }
+                        style={{
+                          height: 30,
+                          width: 30,
+                          tintColor: colors.primary,
+                        }}
+                      />
+                    </View>
+                    <Text>{item.name}</Text>
+                  </View>
+                );
+              })}
           </View>
         </View>
         {/* recent transaction */}
@@ -154,7 +179,7 @@ export const Home = () => {
             <Text style={[typography.label, {color: colors.secondary}]}>
               Today
             </Text>
-            <Text style={[typography.error, {color: colors.text2}]}>
+            <Text style={[typography.error, {color: colors.textTwo}]}>
               See All
             </Text>
           </View>

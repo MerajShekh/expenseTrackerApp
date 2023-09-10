@@ -3,4 +3,7 @@ export const NAVIGATION = {
   Login: 'Login',
   Register: 'Register',
   Profile: 'Profile',
+  Transaction: 'Transaction',
+  Stats: 'Stats',
+  Budget: 'Budget',
 };

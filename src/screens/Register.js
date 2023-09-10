@@ -29,7 +29,7 @@ export const Register = () => {
         <View style={{flex: 1, padding: 10}}>
           <Text
             style={{
-              color: colors.text1,
+              color: colors.textOne,
               fontSize: spacing.l,
               textAlign: 'center',
               marginVertical: 30,
